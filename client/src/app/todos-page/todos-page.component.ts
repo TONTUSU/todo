@@ -7,6 +7,7 @@ import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {EditTodoDialogComponent} from "../edit-todo-dialog/edit-todo-dialog.component";
 import {AuthService} from "../shared/services/auth.service";
 import {SnackService} from "../shared/services/snack.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-todos-page',
@@ -21,7 +22,8 @@ export class TodosPageComponent implements OnInit {
   constructor(private todosService: TodosService,
               private dialog: MatDialog,
               private authService: AuthService,
-              private snackService: SnackService) {}
+              private snackService: SnackService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -42,11 +44,13 @@ export class TodosPageComponent implements OnInit {
     }
     dialogConfig.panelClass = 'edit-todo-container-custom'
     const dialogRef = this.dialog.open(EditTodoDialogComponent, dialogConfig)
-
     dialogRef.afterClosed().subscribe(
       data => {
-        const newTodo = Object.assign(todo, data)
-        this.updateTodo(newTodo)
+        if (data) {
+          const newTodo = Object.assign(todo, data)
+          this.updateTodo(newTodo)
+        }
+
       }
     )
   }
@@ -101,5 +105,6 @@ export class TodosPageComponent implements OnInit {
 
   logout() {
     this.authService.logout()
+    this.router.navigate(['/login'])
   }
 }

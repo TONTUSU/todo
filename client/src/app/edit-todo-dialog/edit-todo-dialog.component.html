@@ -1,5 +1,11 @@
 <mat-dialog-content [formGroup]="form">
-  <button class="close-btn material-icons" (click)="close()">close</button>
+  <button
+    type="button"
+    class="close-btn material-icons"
+    (click)="close()"
+  >
+    close
+  </button>
   <div class="wrapper">
     <mat-form-field>
       <div class="title-textarea" *ngIf="data.title.length > 20">

@@ -3,7 +3,9 @@
     <form
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
+
       <button
+        type="button"
         (click)="logout()"
         class="remove material-icons">
         arrow_back
@@ -19,6 +21,7 @@
       <button
         [disabled] = "form.invalid"
         [class.disabled] = "form.invalid"
+        autofocus
         type="submit"
         class="material-icons">
         add

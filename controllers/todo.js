@@ -15,7 +15,7 @@ module.exports.delete = async function (req, res) {
   try {
     await Todo.remove({_id: req.params.id})
     res.status(200).json({
-      message: `Todo была удалена`
+      message: `Задача удалена`
     })
   } catch (e) {
     errorHandler(res, e)
