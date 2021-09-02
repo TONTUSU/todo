@@ -1,0 +1,44 @@
+<mat-dialog-content [formGroup]="form">
+  <button class="close-btn material-icons" (click)="close()">close</button>
+  <div class="wrapper">
+
+    <mat-form-field>
+      <label for="title">Имя</label>
+      <textarea matInput  id="title" formControlName="title"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="priority">Приоритет</label>
+      <mat-select
+        id="priority"
+        formControlName="priority">
+        <mat-option value="low">Низкий</mat-option>
+        <mat-option value="middle">Средний</mat-option>
+        <mat-option value="high">Высокий</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="deadLine">Крайник срок</label>
+      <input matInput
+             id="deadLine"
+             [min]="minDate"
+             [matDatepicker]="picker"
+             formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker>
+      </mat-datepicker>
+    </mat-form-field>
+
+    <div class="actions">
+
+      <button class="save-btn"
+              [disabled]="form.invalid"
+              (click)="save()">Сохранить
+      </button>
+    </div>
+  </div>
+
+
+</mat-dialog-content>
+

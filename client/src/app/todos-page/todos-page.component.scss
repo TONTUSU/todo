@@ -1,0 +1,195 @@
+.todos {
+  background-color: #ffffff;
+  width: 380px;
+  max-height: 345px;
+  padding-bottom: 5px;
+  margin-top: 18em;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 10px 2px rgba(0, 0, 0, .25);
+  position: relative;
+}
+
+header {
+  position: absolute;
+  background-color: #42A5F5;
+  height: 60px;
+  width: 400px;
+  left: -10px;
+  top: -60px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px 2px rgba(0, 0, 0, .25);
+
+  //flex
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    position: relative;
+    margin-left: 20px;
+
+    //flex
+    display: flex;
+    justify-content: center;
+  }
+
+  input {
+    font-family: inherit;
+    text-align: center;
+    border-bottom: 1px solid white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, .25);
+
+    &.invalid {
+      border-color: #ff0000;
+    }
+
+    &::placeholder {
+      color: white;
+    }
+  }
+
+  button[type="submit"] {
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: 2em;
+    outline: none;
+    border: none;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+
+    &:disabled {
+      color: rgba(255, 255, 255, 0.53);
+    }
+
+    &:hover {
+      color: #e5e5e5;
+      text-shadow: 3px 3px 2px rgba(0, 0, 0, .25);
+    }
+
+    &:active {
+      top: 1px;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, .25)
+    }
+  }
+
+}
+
+.todos-content {
+  position: relative;
+  top: -85px;
+
+  .todos-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px 0 10px 10px;
+    top: 90px;
+    padding: 0 20px 0 0;
+    max-height: 335px;
+    overflow: auto;
+    position: relative;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #18aaaa;
+    }
+
+    &::-webkit-scrollbar-track {
+      margin-top: 20px;
+      background-color: #f9f9fd;
+    }
+
+    .todo-item {
+      color: #004470;
+      height: 40px;
+      border-bottom: 1px solid #0077C2;
+      font-size: 1.3em;
+
+      //flex
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-shrink: 0;
+
+      span {
+        cursor: pointer;
+
+        &.completed {
+          text-decoration: line-through;
+          color: #0f9d58;
+        }
+
+        &:hover {
+          color: #007fd2;
+        }
+      }
+
+      button {
+        position: relative;
+        cursor: pointer;
+        border: none;
+        font-size: 1.8rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, .25);
+        background-color: transparent;
+        outline: none;
+
+        &.check {
+          color: #00E676;
+          font-size: 1.4em;
+
+          &:hover {
+            top: -1px;
+            color: rgba(0, 230, 118, 0.58);
+            text-shadow: 3px 2px 4px rgba(0, 0, 0, .25);
+          }
+
+          &:active {
+            top: 1px;
+          }
+
+          &:focus {
+            color: #00a454;
+          }
+        }
+
+        &.remove {
+          margin-left: auto;
+          color: #ff0000;
+          text-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+          font-size: 1.4em;
+
+          &:hover {
+            top: -1px;
+            color: rgba(255, 0, 0, 0.67);
+            text-shadow: 3px 2px 4px rgba(0, 0, 0, .25);
+          }
+
+          &:active {
+            top: 1px;
+          }
+
+          &:focus {
+            color: #7c0000;
+          }
+        }
+
+        &.isComplete {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.overflow {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

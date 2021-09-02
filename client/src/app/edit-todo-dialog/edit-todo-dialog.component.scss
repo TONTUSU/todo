@@ -1,0 +1,44 @@
+mat-dialog-content {
+  height: 100%;
+  position: relative;
+
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.close-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  border: none;
+  outline: none;
+
+  &:hover {
+    color: lighten(black, 50);
+  }
+
+  &:active {
+    color: black;
+  }
+}
+
+.invalid {
+  border: #7c0000;
+}
+
+.actions {
+  align-self: center;
+}
+
+.save-btn {
+  span {
+    font-size: 1.3em;
+    vertical-align: bottom;
+  }
+}
+

@@ -1,0 +1,48 @@
+mat-dialog-content {
+  overflow-y: hidden;
+
+  .actions {
+    float: right;
+    margin: 0;
+    padding: 0;
+
+    button {
+      position: relative;
+      border: none;
+      outline: none;
+      border-radius: 2px;
+      height: 20px;
+      cursor: pointer;
+      margin-bottom: 2px;
+
+      &.delete-btn {
+        background-color: #ff0000;
+        margin-left: 5px;
+        color: white;
+
+        &:hover {
+          background-color: #cb0000;
+        }
+
+        &:active {
+          background-color: #ff0000;
+          top: 1px;
+        }
+      }
+
+      &.cancel-btn {
+        border: 1px solid black;
+        color: black;
+
+        &:hover {
+          background-color: #d5d5d5;
+        }
+
+        &:active {
+          background-color: white;
+          top: 1px;
+        }
+      }
+    }
+  }
+}
