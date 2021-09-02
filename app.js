@@ -34,7 +34,6 @@ if (process.env.NODE_ENV === 'production') {
         path.resolve(__dirname, 'client', 'dist', 'client', 'index.html' )
     )
   })
-
 }
 
 module.exports = app
