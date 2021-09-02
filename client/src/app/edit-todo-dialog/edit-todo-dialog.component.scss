@@ -3,6 +3,9 @@ mat-dialog-content {
   position: relative;
 
 }
+mat-form-field {
+  font-size: .8em;
+}
 
 .wrapper {
   display: flex;
@@ -37,7 +40,6 @@ mat-dialog-content {
 
 .save-btn {
   span {
-    font-size: 1.3em;
     vertical-align: bottom;
   }
 }

@@ -13,6 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('token.interceptor')
     if (this.auth.isAuthenticated()) {
       req = req.clone({
         setHeaders: {

@@ -3,8 +3,16 @@
   <div class="wrapper">
 
     <mat-form-field>
-      <label for="title">Имя</label>
-      <textarea matInput  id="title" formControlName="title"></textarea>
+      <div class="title-textarea" *ngIf="data.title.length > 20">
+        <label for="title-input">Имя</label>
+        <textarea rows="3" matInput  id="title-input" formControlName="title"></textarea>
+      </div>
+      <div class="title-input" *ngIf="data.title.length < 20">
+        <label for="title-textarea">Имя</label>
+        <input matInput  id="title-textarea" formControlName="title">
+      </div>
+
+
     </mat-form-field>
 
     <mat-form-field>

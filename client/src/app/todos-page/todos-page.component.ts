@@ -36,7 +36,7 @@ export class TodosPageComponent implements OnInit {
     dialogConfig.position = {
       top: '100px'
     }
-    dialogConfig.panelClass = 'delete-dialog-container-custom'
+    dialogConfig.panelClass = 'edit-todo-container-custom'
     const dialogRef = this.dialog.open(EditTodoDialogComponent, dialogConfig)
 
     dialogRef.afterClosed().subscribe(
@@ -66,6 +66,7 @@ export class TodosPageComponent implements OnInit {
     dialogConfig.position = {
       top: '100px'
     }
+    dialogConfig.panelClass = 'delete-dialog-container-custom'
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig)
 
     dialogRef.afterClosed().subscribe(
