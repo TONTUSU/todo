@@ -22,7 +22,6 @@ export class AuthService {
       .pipe(
         tap(
           ({token}) => {
-            console.log('Auth.service запись в локальное хранилище')
             localStorage.setItem('auth-token', token)
             this.setToken(token)
           }

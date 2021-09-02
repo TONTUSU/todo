@@ -1,7 +1,6 @@
 <mat-dialog-content [formGroup]="form">
   <button class="close-btn material-icons" (click)="close()">close</button>
   <div class="wrapper">
-
     <mat-form-field>
       <div class="title-textarea" *ngIf="data.title.length > 20">
         <label for="title-input">Имя</label>
@@ -14,7 +13,6 @@
 
 
     </mat-form-field>
-
     <mat-form-field>
       <label for="priority">Приоритет</label>
       <mat-select
@@ -25,7 +23,6 @@
         <mat-option value="high">Высокий</mat-option>
       </mat-select>
     </mat-form-field>
-
     <mat-form-field>
       <label for="deadLine">Крайник срок</label>
       <input matInput
@@ -37,7 +34,6 @@
       <mat-datepicker #picker>
       </mat-datepicker>
     </mat-form-field>
-
     <div class="actions">
 
       <button class="save-btn"

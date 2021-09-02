@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {EditTodoDialogComponent} from "../edit-todo-dialog/edit-todo-dialog.component";
+import {AuthService} from "../shared/services/auth.service";
+import {SnackService} from "../shared/services/snack.service";
 
 @Component({
   selector: 'app-todos-page',
@@ -17,7 +19,9 @@ export class TodosPageComponent implements OnInit {
   min!: Date
 
   constructor(private todosService: TodosService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog,
+              private authService: AuthService,
+              private snackService: SnackService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -73,7 +77,7 @@ export class TodosPageComponent implements OnInit {
       data => {
         if (data) {
           this.todosService.delete(todo).subscribe(
-            message => console.log(message)
+            message => this.snackService.openSnackBar(message.message, 'Ok')
           )
           const idx = this.todos.findIndex(item => item === todo)
           this.todos.splice(idx, 1)
@@ -93,5 +97,9 @@ export class TodosPageComponent implements OnInit {
         this.form.reset()
       }
     )
+  }
+
+  logout() {
+    this.authService.logout()
   }
 }

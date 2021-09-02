@@ -11,6 +11,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MomentDateModule} from "@angular/material-moment-adapter"
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 import {TokenInterceptor} from "./shared/classes/token.interceptor";
 import {AppComponent} from './app.component';
@@ -46,6 +47,7 @@ import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
     MatNativeDateModule,
     MatButtonModule,
     MomentDateModule,
+    MatSnackBarModule
   ],
   providers: [
     {

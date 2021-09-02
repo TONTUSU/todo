@@ -3,6 +3,11 @@
     <form
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
+      <button
+        (click)="logout()"
+        class="remove material-icons">
+        arrow_back
+      </button>
       <input
         placeholder="Задача"
         formControlName="title"

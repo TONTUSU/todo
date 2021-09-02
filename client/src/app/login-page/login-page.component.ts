@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {SnackService} from "../shared/services/snack.service";
 
 @Component({
   selector: 'app-login-page',
@@ -16,7 +17,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private snackService: SnackService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     })
     this.route.queryParams.subscribe((params: Params)=> {
       if (params['registered']) {
+        this.snackService.openSnackBar('Теперь вы можете войти', 'Отлично')
         console.log('Теперь вы можете войти')
       } else if (params['accessDenied']) {
         console.log('Session failed')
@@ -46,7 +49,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.aSub = this.auth.login(this.form.value).subscribe(
       () => this.router.navigate(['/todo']),
       error => {
-        console.log(error.error.message)
+        this.snackService.openSnackBar(error.error.message, 'Ok')
         this.form.enable()
       }
     )

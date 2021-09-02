@@ -3,7 +3,7 @@
   width: 380px;
   max-height: 345px;
   padding-bottom: 5px;
-  margin-top: 18em;
+  margin-top: 14em;
   border-radius: 0 0 15px 15px;
   box-shadow: 0 4px 10px 2px rgba(0, 0, 0, .25);
   position: relative;
@@ -11,11 +11,11 @@
 
 header {
   position: absolute;
-  background-color: #42A5F5;
-  height: 60px;
+  background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
+  height: 45px;
   width: 400px;
   left: -10px;
-  top: -60px;
+  top: -45px;
   border-radius: 5px;
   box-shadow: 0 4px 10px 2px rgba(0, 0, 0, .25);
 
@@ -36,6 +36,7 @@ header {
 
   input {
     font-family: inherit;
+    font-size: 1em;
     text-align: center;
     border-bottom: 1px solid white;
     text-shadow: 3px 3px 3px rgba(0, 0, 0, .25);
@@ -49,7 +50,7 @@ header {
     }
   }
 
-  button[type="submit"] {
+  button{
     position: relative;
     cursor: pointer;
     background-color: transparent;
@@ -63,7 +64,7 @@ header {
       color: rgba(255, 255, 255, 0.53);
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       color: #e5e5e5;
       text-shadow: 3px 3px 2px rgba(0, 0, 0, .25);
     }
@@ -108,9 +109,10 @@ header {
 
     .todo-item {
       color: #004470;
-      height: 40px;
+      height: 30px;
       border-bottom: 1px solid #0077C2;
-      font-size: 1.4em;
+      font-size: 1.1em;
+      margin-bottom: 5px;
 
       //flex
       display: flex;
@@ -143,7 +145,6 @@ header {
 
         &.check {
           color: #00E676;
-          font-size: 1em;
 
           &:hover {
             top: -1px;
@@ -164,7 +165,6 @@ header {
           margin-left: auto;
           color: #ff0000;
           text-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
-          font-size: 1em;
 
           &:hover {
             top: -1px;

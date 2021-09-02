@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {SnackService} from "../shared/services/snack.service";
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +15,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   aSub!: Subscription
 
   constructor(private auth: AuthService,
-              private router: Router) {
+              private router: Router,
+              private snackService: SnackService) {
   }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
           })
         },
         error => {
-          console.log(error.error.message)
+          this.snackService.openSnackBar(error.error.message, 'Ok')
           this.form.enable()
         }
       )
