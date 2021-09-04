@@ -1,46 +1,56 @@
 mat-dialog-content {
   height: 100%;
   overflow-y: hidden;
+  padding: 0;
 
+  .mat-dialog-title {
+    padding: 10px 15px;
+    margin: 0;
+    p {
+      margin: 0;
+    }
+  }
   .actions {
-    float: right;
+    border-radius: 0 0 10px 10px;
+    //float: right;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: row;
 
     button {
+      width: 100%;
       position: relative;
       border: none;
       outline: none;
-      border-radius: 5px;
-      height: 20px;
+      //border-radius: 10px;
+      height: 40px;
       cursor: pointer;
-      margin-bottom: 2px;
 
       &.delete-btn {
-        background-color: #ff0000;
-        margin-left: 5px;
+        background-color: #da3a34;
         color: white;
 
         &:hover {
-          background-color: #cb0000;
+          background-color: #be4949;
         }
 
         &:active {
-          background-color: #ff0000;
+          background-color:  #d3221b;
           top: 1px;
         }
       }
 
       &.cancel-btn {
-        border: 1px solid black;
-        color: black;
+        color: white;
+        background-color:  #3e81b0;
 
         &:hover {
-          background-color: #d5d5d5;
+          background-color: #5f8aa8;
         }
 
         &:active {
-          background-color: white;
+          background-color:  #3e81b0;
           top: 1px;
         }
       }

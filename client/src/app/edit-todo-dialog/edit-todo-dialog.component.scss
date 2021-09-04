@@ -1,56 +1,70 @@
 mat-dialog-content {
   position: relative;
-
-}
-
-mat-form-field {
-  width: 100%;
-  font-size: .8em;
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: #004470;
-  }
-}
-
-.wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
+  height: auto;
+  padding: 0;
 
-.close-btn {
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  border: none;
-  outline: none;
-
-  &:hover {
-    color: lighten(black, 50);
+  .wrapper {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
 
-  &:active {
-    color: black;
+  .actions {
+    border-radius: 0 0 10px 10px;
+    //float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    button {
+      width: 100%;
+      border: none;
+      outline: none;
+      height: 40px;
+      cursor: pointer;
+      &.close-btn {
+        background-color: #da3a34;
+        color: white;
+        &:hover {
+          background-color: #be4949;
+        }
+        &:active {
+          background-color:  #d3221b;
+          top: 1px;
+        }
+      }
+      &.save-btn {
+        color: white;
+        background-color:  #3e81b0;
+        &:hover {
+          background-color: #5f8aa8;
+        }
+
+        &:active {
+          background-color:  #3e81b0;
+          top: 1px;
+        }
+      }
+
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+    font-size: .8em;
+
+    label {
+      display: block;
+      color: #004470;
+    }
   }
 }
 
-.invalid {
-  border: #7c0000;
-}
 
-.actions {
-  align-self: center;
-}
 
-.save-btn {
-  outline: none;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  span {
-    vertical-align: bottom;
-  }
-}
+
 

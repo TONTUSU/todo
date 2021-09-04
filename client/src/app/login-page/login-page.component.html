@@ -1,63 +1,71 @@
 <div class="auth-block">
+  <h1>Войти в аккаунт</h1>
   <form class="login form"
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
   >
-    <span class="card-title">Войти в аккаунт</span>
     <div class="card-content">
       <div class="input-field">
         <input
-          placeholder="email"
+          placeholder="Email"
           formControlName="email"
           id="email"
           type="email"
           required
           [ngClass]="{invalid: form.get('email').invalid && form.get('email').touched}"
         >
-        <span
-          *ngIf="form.get('email').invalid && form.get('email').touched"
-          class="helper-text red-text"
+        <div *ngIf="form.get('email').invalid && form.get('email').touched"
+             class="error-container fas fa-exclamation"
         >
-        <span *ngIf="form.get('email').errors['required']">Email не может быть пустым</span>
-        <span *ngIf="form.get('email').errors['email']">Некорректный email</span>
-      </span>
+        <span *ngIf="form.get('email').errors['required']"
+              class="error-tooltip">
+          Введите Email
+        </span>
+          <span *ngIf="form.get('email').errors['email']"
+                class="error-tooltip">
+          Некорректный email
+        </span>
+        </div>
+
       </div>
       <div class="input-field">
         <input
-          placeholder="пароль"
+          placeholder="Пароль"
           formControlName="password"
           id="password"
           type="password"
           required
           [ngClass]="{invalid: form.get('password').invalid && form.get('password').touched}"
         >
-        <span
-          *ngIf="form.get('password').invalid && form.get('password').touched"
-          class="helper-text red-text"
-        >
-        <span *ngIf="form.get('password').errors['required']">Пароль не может быть пустым</span>
-        <span
-          *ngIf="form.get('password').errors['minlength']">Пароль должен быть больше {{form.get('password').errors['minlength']['requiredLength']}}
-          символов</span>
-      </span>
+        <div *ngIf="form.get('password').invalid && form.get('password').touched"
+             class="error-container fas fa-exclamation">
+
+          <span class="error-tooltip"
+                *ngIf="form.get('password').errors['required']">
+            Введите пароль</span>
+          <span class="error-tooltip"
+                *ngIf="form.get('password').errors['minlength']">
+            Пароль слишком короткий
+          </span>
+        </div>
       </div>
     </div>
     <div class="card-action">
-
       <button
         type="submit"
         class="modal-action btn waves-effect"
-        [disabled]="form.invalid || form.disabled"
       >
         Войти
       </button>
-      <button
-        type="button"
-      routerLink="/register"
-      class="register-btn"
-    >
-      Регистрация
-    </button>
     </div>
   </form>
+  <button
+    type="button"
+    routerLink="/register"
+    class="register-btn"
+  >
+    Регистрация
+  </button>
 </div>
+<!--
+[disabled]="form.invalid || form.disabled"-->

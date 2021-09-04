@@ -4,17 +4,37 @@ import {AuthService} from "../shared/services/auth.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {SnackService} from "../shared/services/snack.service";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  animations: [
+    trigger('trigger', [
+      transition(':enter', [
+        style({
+          opacity: 0
+        }),
+        animate('500ms', style({opacity: 1}))
+      ]),
+      transition(':leave', [
+        animate('500ms', style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 
 export class LoginPageComponent implements OnInit, OnDestroy {
+  trueFalse = false
+
+
+  isShown = false
+
+
+
   form: any
   aSub!: Subscription
-
   constructor(private auth: AuthService,
               private router: Router,
               private route: ActivatedRoute,

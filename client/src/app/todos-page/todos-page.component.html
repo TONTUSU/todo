@@ -1,55 +1,54 @@
-<div class="todos">
-  <header class="create-todo">
-    <form
-      [formGroup]="form"
-      (ngSubmit)="onSubmit()">
-
-      <button
-        type="button"
-        (click)="logout()"
-        class="remove material-icons">
-        arrow_back
-      </button>
-      <input
-        placeholder="Задача"
-        formControlName="title"
-        type="text"
-        [ngClass]="{
+<div class="bg">
+  <div class="todos">
+    <header class="create-todo">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()">
+        <button
+          type="button"
+          (click)="logout()"
+          class="logout-btn fas fa-sign-out-alt">
+        </button>
+        <input
+          placeholder="Задача"
+          formControlName="title"
+          type="text"
+          [ngClass]="{
           'invalid': form.get('title')?.invalid && form.get('title')?.touched
         }"
-      >
-      <button
-        [disabled] = "form.invalid"
-        [class.disabled] = "form.invalid"
-        autofocus
-        type="submit"
-        class="material-icons">
-        add
-      </button>
-    </form>
-  </header>
-  <main class="todos-content">
-    <ul class="todos-list">
-      <li class="todo-item" *ngFor="let todo of todos">
+        >
         <button
-          [class.isComplete]="todo.status"
-          (click)="switchCompleted(todo)"
-          class="check material-icons">
-          {{todo.status ? 'done_all' : 'done'}}
+          [disabled]="form.invalid"
+          [class.disabled]="form.invalid"
+          autofocus
+          type="submit"
+          class="create-btn">
+          <i class="far fa-plus-square"></i>
         </button>
-        <span
-          class="todo-title overflow"
-          [ngClass]="{completed: todo.status }"
-          (click)="editTodo(todo)">
+      </form>
+    </header>
+    <main class="todos-content">
+      <ul class="todos-list">
+        <li class="todo-item" *ngFor="let todo of todos">
+          <button
+            [class.isComplete]="todo.status"
+            (click)="switchCompleted(todo)"
+            class="check">
+            <i class="fas fa-check"></i>
+          </button>
+          <span
+            class="todo-title overflow"
+            [ngClass]="{completed: todo.status }"
+            (click)="editTodo(todo)">
           {{todo.title}}
         </span>
-        <button
-          (click)="deleteTodo(todo)"
-          class="remove material-icons">
-          delete
-        </button>
-      </li>
-    </ul>
-  </main>
+          <button
+            (click)="deleteTodo(todo)"
+            class="remove">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </main>
+  </div>
 </div>
-

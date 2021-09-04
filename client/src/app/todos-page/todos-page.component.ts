@@ -12,9 +12,9 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-todos-page',
   templateUrl: './todos-page.component.html',
-  styleUrls: ['./todos-page.component.scss'],
+  styleUrls: ['./todos-page.component.scss']
 })
-export class TodosPageComponent implements OnInit {
+export class TodosPageComponent implements OnInit{
   todos!: Todo[]
   form!: FormGroup
   min!: Date

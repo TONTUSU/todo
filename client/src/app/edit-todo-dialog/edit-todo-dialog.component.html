@@ -1,20 +1,14 @@
 <mat-dialog-content [formGroup]="form">
-  <button
-    type="button"
-    class="close-btn material-icons"
-    (click)="close()"
-  >
-    close
-  </button>
+
   <div class="wrapper">
     <mat-form-field>
       <div class="title-textarea" *ngIf="data.title.length > 20">
         <label for="title-input">Имя</label>
-        <textarea rows="3" matInput  id="title-input" formControlName="title"></textarea>
+        <textarea rows="3" matInput id="title-input" formControlName="title"></textarea>
       </div>
       <div class="title-input" *ngIf="data.title.length < 20">
         <label for="title-textarea">Имя</label>
-        <input matInput  id="title-textarea" formControlName="title">
+        <input matInput id="title-textarea" formControlName="title">
       </div>
 
 
@@ -40,13 +34,23 @@
       <mat-datepicker #picker>
       </mat-datepicker>
     </mat-form-field>
-    <div class="actions">
 
-      <button class="save-btn"
-              [disabled]="form.invalid"
-              (click)="save()">Сохранить
-      </button>
-    </div>
+
+  </div>
+  <div class="actions">
+    <button
+      type="button"
+      class="close-btn"
+      (click)="close()"
+    >
+      Отменить
+    </button>
+    <button class="save-btn"
+            [disabled]="form.invalid"
+            (click)="save()"
+    >
+      Сохранить
+    </button>
   </div>
 
 
