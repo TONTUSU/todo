@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
 import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {ReplaySubject} from "rxjs";
 import {SnackService} from "../shared/services/snack.service";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-register-page',
@@ -12,8 +13,7 @@ import {SnackService} from "../shared/services/snack.service";
 })
 export class RegisterPageComponent implements OnInit, OnDestroy {
   form: any
-  aSub!: Subscription
-
+  destroy: ReplaySubject<any> = new ReplaySubject<any>(1)
   constructor(private auth: AuthService,
               private router: Router,
               private snackService: SnackService) {
@@ -27,12 +27,13 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.aSub) this.aSub.unsubscribe()
+    this.destroy.next(null)
+    this.destroy.complete()
   }
 
   onSubmit() {
     this.form.disable()
-    this.aSub = this.auth.register(this.form.value)
+    this.auth.register(this.form.value).pipe(takeUntil(this.destroy))
       .subscribe(
         () => {
           this.router.navigate(['/login'], {queryParams: {registered: true}

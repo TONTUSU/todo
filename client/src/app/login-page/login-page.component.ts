@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
-import {Subscription} from "rxjs";
+import {ReplaySubject} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {SnackService} from "../shared/services/snack.service";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-login-page',
@@ -26,15 +27,9 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 
 export class LoginPageComponent implements OnInit, OnDestroy {
-  trueFalse = false
-
-
   isShown = false
-
-
-
   form: any
-  aSub!: Subscription
+  destroy: ReplaySubject<any> = new ReplaySubject<any>(1)
   constructor(private auth: AuthService,
               private router: Router,
               private route: ActivatedRoute,
@@ -46,7 +41,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, [Validators.minLength(6), Validators.required])
     })
-    this.route.queryParams.subscribe((params: Params)=> {
+    this.route.queryParams.pipe(takeUntil(this.destroy)).subscribe((params: Params)=> {
       if (params['registered']) {
         this.snackService.openSnackBar('Теперь вы можете войти', 'Отлично')
         console.log('Теперь вы можете войти')
@@ -59,14 +54,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.aSub) {
-      this.aSub.unsubscribe()
-    }
+    this.destroy.next(null)
+    this.destroy.complete()
   }
 
   onSubmit() {
     this.form.disable()
-    this.aSub = this.auth.login(this.form.value).subscribe(
+    this.auth.login(this.form.value).pipe(takeUntil(this.destroy)).subscribe(
       () => this.router.navigate(['/todo']),
       error => {
         this.snackService.openSnackBar(error.error.message, 'Ok')

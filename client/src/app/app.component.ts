@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./shared/services/auth.service";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -15,3 +16,13 @@ export class AppComponent implements OnInit{
     }
   }
 }
+export const MAIN_API = [
+  {
+    provide: 'AUTH_API',
+    useValue: environment.AUTH_API
+  },
+  {
+    provide: 'TODO_API',
+    useValue: environment.TODO_API
+  }
+]

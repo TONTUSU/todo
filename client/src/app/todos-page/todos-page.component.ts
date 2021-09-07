@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Todo} from "../shared/interfaces";
 import {TodosService} from "../shared/services/todos.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -8,16 +8,19 @@ import {EditTodoDialogComponent} from "../edit-todo-dialog/edit-todo-dialog.comp
 import {AuthService} from "../shared/services/auth.service";
 import {SnackService} from "../shared/services/snack.service";
 import {Router} from "@angular/router";
+import {ReplaySubject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-todos-page',
   templateUrl: './todos-page.component.html',
   styleUrls: ['./todos-page.component.scss']
 })
-export class TodosPageComponent implements OnInit{
+export class TodosPageComponent implements OnInit, OnDestroy {
   todos!: Todo[]
   form!: FormGroup
   min!: Date
+  destroy: ReplaySubject<any> = new ReplaySubject<any>(1)
 
   constructor(private todosService: TodosService,
               private dialog: MatDialog,
@@ -31,7 +34,12 @@ export class TodosPageComponent implements OnInit{
         null,
         [Validators.required, Validators.maxLength(50)])
     })
-    this.todosService.fetch().subscribe(todos => (this.todos = todos).reverse())
+    this.todosService.fetch().pipe(takeUntil(this.destroy)).subscribe(todos => (this.todos = todos).reverse())
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(null)
+    this.destroy.complete()
   }
 
   editTodo(todo: Todo) {
@@ -44,13 +52,12 @@ export class TodosPageComponent implements OnInit{
     }
     dialogConfig.panelClass = 'edit-todo-container-custom'
     const dialogRef = this.dialog.open(EditTodoDialogComponent, dialogConfig)
-    dialogRef.afterClosed().subscribe(
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy)).subscribe(
       data => {
         if (data) {
           const newTodo = Object.assign(todo, data)
           this.updateTodo(newTodo)
         }
-
       }
     )
   }
@@ -61,9 +68,7 @@ export class TodosPageComponent implements OnInit{
   }
 
   updateTodo(todo: Todo) {
-    this.todosService.update(todo).subscribe()
-    const idx = this.todos.findIndex(item => item === todo)
-    this.todos[idx] = todo
+    this.todosService.update(todo).pipe(takeUntil(this.destroy)).subscribe()
   }
 
   deleteTodo(todo: Todo) {
@@ -77,10 +82,10 @@ export class TodosPageComponent implements OnInit{
     dialogConfig.panelClass = 'delete-dialog-container-custom'
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig)
 
-    dialogRef.afterClosed().subscribe(
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy)).subscribe(
       data => {
         if (data) {
-          this.todosService.delete(todo).subscribe(
+          this.todosService.delete(todo).pipe(takeUntil(this.destroy)).subscribe(
             message => this.snackService.openSnackBar(message.message, 'Ok')
           )
           const idx = this.todos.findIndex(item => item === todo)
@@ -95,7 +100,8 @@ export class TodosPageComponent implements OnInit{
       title: this.form.value.title,
       status: false
     }
-    this.todosService.create(newTodo).subscribe(
+
+    this.todosService.create(newTodo).pipe(takeUntil(this.destroy)).subscribe(
       todo => {
         this.todos.unshift(todo)
         this.form.reset()

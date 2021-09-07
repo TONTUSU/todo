@@ -8,19 +8,20 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MomentDateModule} from "@angular/material-moment-adapter"
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 import {TokenInterceptor} from "./shared/classes/token.interceptor";
-import {AppComponent} from './app.component';
+import {AppComponent, MAIN_API} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {TodosPageComponent} from './todos-page/todos-page.component';
 import {EditTodoDialogComponent} from './edit-todo-dialog/edit-todo-dialog.component';
 import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
+
 
 
 @NgModule({
@@ -68,7 +69,12 @@ import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
           monthYearA11yLabel: 'MMMM YYYY',
         },
       }
-    }
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'ru-RU'
+    },
+    MAIN_API
 
   ],
   bootstrap: [AppComponent],
