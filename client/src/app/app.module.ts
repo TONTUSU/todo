@@ -14,15 +14,25 @@ import {MomentDateModule} from "@angular/material-moment-adapter"
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 import {TokenInterceptor} from "./shared/classes/token.interceptor";
-import {AppComponent, MAIN_API} from './app.component';
+import {AppComponent} from './app.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {TodosPageComponent} from './todos-page/todos-page.component';
 import {EditTodoDialogComponent} from './edit-todo-dialog/edit-todo-dialog.component';
 import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
+import {environment} from "../environments/environment";
 
-
+export const MAIN_API = [
+  {
+    provide: 'AUTH_API',
+    useValue: environment.AUTH_API
+  },
+  {
+    provide: 'TODO_API',
+    useValue: environment.TODO_API
+  }
+]
 
 @NgModule({
   declarations: [
